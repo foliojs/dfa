@@ -1,0 +1,31 @@
+{
+  "name": "state-machine",
+  "version": "1.0.0",
+  "description": "A state machine compiler",
+  "main": "src/StateMachine.js",
+  "dependencies": {
+    "babel": "^5.8.38",
+    "pegjs": "^0.10.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.0"
+  },
+  "scripts": {
+    "test": "mocha --require babel/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/devongovett/state-machine.git"
+  },
+  "keywords": [
+    "state",
+    "machine",
+    "compiler"
+  ],
+  "author": "Devon Govett <devongovett@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devongovett/state-machine/issues"
+  },
+  "homepage": "https://github.com/devongovett/state-machine#readme"
+}

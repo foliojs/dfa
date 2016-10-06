@@ -1,0 +1,56 @@
+{
+  var n = require('./nodes');
+}
+
+rules
+  = statement+
+
+statement
+  = s:statement_type [ \t\r\n]* { return s }
+
+statement_type
+  = assignment
+  / comment
+
+comment
+  = '#' v:[^\r\n]* [\r\n] { return new n.Comment(v.join('')) }
+
+assignment
+  = v:variable _ '=' _ e:expr ';' { return new n.Assignment(v, e) }
+
+variable
+  = v:name  { return new n.Variable(v) }
+
+expr
+  = a:expr_q _ '|' _ b:expr     { return new n.Alternation(a, b) }
+  / a:expr_q _ b:expr           { return new n.Concatenation(a, b) }
+  / expr_q
+
+expr_q
+  = t:name ':' e:expr_q { return new n.Concatenation(e, new n.Tag(t)) }
+  / t:term '*'  { return new n.Repeat(t, '*') }
+  / t:term '?'  { return new n.Repeat(t, '?') }
+  / t:term '+'  { return new n.Repeat(t, '+') }
+  / term
+
+term
+  = variable
+  / x:number { return new n.Literal(x) }
+  / '(' e:expr ')' { return e }
+
+name
+  = a:name_start_char b:name_char* { return a + b.join('') }
+
+name_start_char
+  = "_"
+  / [a-zA-Z]
+
+name_char
+  = name_start_char
+  / [0-9]
+
+number
+  = num:[0-9]+  { return parseInt(num.join('')) }
+
+_
+  = [ \t]*
