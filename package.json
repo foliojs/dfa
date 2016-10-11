@@ -1,5 +1,5 @@
 {
-  "name": "state-machine",
+  "name": "@devongovett/state-machine",
   "version": "1.0.0",
   "description": "A state machine compiler",
   "main": "index.js",
