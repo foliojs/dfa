@@ -82,4 +82,13 @@ describe('state machine compiler', function () {
       ['x', 9, 10, [1, 0]]
     ]);
   });
+
+  it('should compile a state machine with external symbols', function () {
+    let stateMachine = compile('main = a b;', {a: 0, b: 1});
+    let matches = Array.from(stateMachine.match([0, 0, 1, 1, 0, 1, 0]));
+    assert.deepEqual(matches, [
+      [1, 2, []],
+      [4, 5, []]
+    ]);
+  });
 });

@@ -4,12 +4,22 @@ import {Assignment, Literal, Node, Variable} from './nodes';
  * Processes a list of statements into a symbol table
  */
 export default class SymbolTable {
-  constructor(statements) {
+  constructor(statements, externalSymbols = {}) {
     this.variables = {};
     this.symbols = {};
     this.main = null;
     this.size = 0;
+
+    this.addExternalSymbols(externalSymbols);
     this.process(statements);
+  }
+
+  addExternalSymbols(externalSymbols) {
+    for (let key in externalSymbols) {
+      this.variables[key] = new Literal(externalSymbols[key]);
+      this.symbols[key] = externalSymbols[key];
+      this.size++;
+    }
   }
 
   process(statements) {
