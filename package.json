@@ -1,5 +1,5 @@
 {
-  "name": "@devongovett/state-machine",
+  "name": "dfa",
   "version": "1.0.0",
   "description": "A state machine compiler",
   "main": "index.js",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/devongovett/state-machine.git"
+    "url": "git+ssh://git@github.com/devongovett/dfa.git"
   },
   "keywords": [
     "state",
@@ -35,9 +35,9 @@
   "author": "Devon Govett <devongovett@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/devongovett/state-machine/issues"
+    "url": "https://github.com/devongovett/dfa/issues"
   },
-  "homepage": "https://github.com/devongovett/state-machine#readme",
+  "homepage": "https://github.com/devongovett/dfa#readme",
   "files": [
     "index.js",
     "index.js.map",

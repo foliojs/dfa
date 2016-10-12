@@ -1,4 +1,4 @@
-# state-machine
+# dfa
 
 Compiles a regular expression like syntax to fast deterministic finite automata.
 Useful for pattern matching against non-string sequences.
@@ -35,7 +35,7 @@ Visualized, the machine looks like this (double circles are accepting states):
 Compiling and using the machine:
 
 ```javascript
-import compile from 'state-machine/compile';
+import compile from 'dfa/compile';
 import fs from 'fs';
 
 let stateMachine = compile(fs.readFileSync('hangul.machine', 'utf8'));
