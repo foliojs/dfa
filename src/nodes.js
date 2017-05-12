@@ -25,6 +25,10 @@ export class Variable extends Node {
     super();
     this.name = name;
   }
+
+  copy() {
+    return new Variable(this.name);
+  }
 }
 
 /**
@@ -157,6 +161,35 @@ export class Repeat extends Node {
   copy() {
     return new Repeat(this.expression.copy(), this.op);
   }
+}
+
+export function buildRepetition(expression, min = 0, max = Infinity) {
+  if (min < 0 || min > max) {
+    throw new Error(`Invalid repetition range: ${min} ${max}`);
+  }
+
+  let res = null;
+  for (let i = 0; i < min; i++) {
+    res = concat(res, expression.copy());
+  }
+
+  if (max === Infinity) {
+    res = concat(res, new Repeat(expression.copy(), '*'));
+  } else {
+    for (let i = min; i < max; i++) {
+      res = concat(res, new Repeat(expression.copy(), '?'))
+    }
+  }
+
+  return res;
+}
+
+function concat(a, b) {
+  if (!a) {
+    return b;
+  }
+
+  return new Concatenation(a, b);
 }
 
 /**

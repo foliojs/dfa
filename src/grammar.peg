@@ -31,12 +31,19 @@ expr_q
   / t:term '*'  { return new n.Repeat(t, '*') }
   / t:term '?'  { return new n.Repeat(t, '?') }
   / t:term '+'  { return new n.Repeat(t, '+') }
+  / t:term '{' m:number '}' { return n.buildRepetition(t, m, m) }
+  / t:term '{' min:number ',' '}' { return n.buildRepetition(t, min, Infinity) }
+  / t:term '{' ',' max:number '}' { return n.buildRepetition(t, 0, max) }
+  / t:term '{' min:number ',' max:number '}' { return n.buildRepetition(t, min, max) }
   / term
 
 term
   = variable
   / x:number { return new n.Literal(x) }
   / '(' e:expr ')' { return e }
+
+repetition
+  = '{' number '}' { return n.buildRepetition() }
 
 name
   = a:name_start_char b:name_char* { return a + b.join('') }

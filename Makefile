@@ -1,8 +1,11 @@
 SOURCES = $(shell find src)
 
+SHELL := /bin/bash
+PATH := ./node_modules/.bin:$(PATH)
+
 all: index.js compile.js
 
-src/grammar.js:
+src/grammar.js: src/grammar.peg
 	pegjs src/grammar.peg
 
 index.js: $(SOURCES)

@@ -58,6 +58,43 @@ describe('state machine compiler', function () {
     ]);
   });
 
+  it('should compile a state machine with an exact repetition', function () {
+    let stateMachine = compile('a = 0; b = 1; main = a{3} b;');
+    let matches = Array.from(stateMachine.match([0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1]));
+    assert.deepEqual(matches, [
+      [3, 6, []]
+    ]);
+  });
+
+  it('should compile a state machine with a minimum repetition', function () {
+    let stateMachine = compile('a = 0; b = 1; main = a{3,} b;');
+    let matches = Array.from(stateMachine.match([0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1]));
+    assert.deepEqual(matches, [
+      [3, 6, []],
+      [7, 11, []]
+    ]);
+  });
+
+  it('should compile a state machine with a maximum repetition', function () {
+    let stateMachine = compile('a = 0; b = 1; main = a{,3} b;');
+    let matches = Array.from(stateMachine.match([0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1]));
+    assert.deepEqual(matches, [
+      [0, 2, []],
+      [3, 6, []],
+      [10, 11, []],
+      [12, 12, []]
+    ]);
+  });
+
+  it('should compile a state machine with a minimum and maximum repetition', function () {
+    let stateMachine = compile('a = 0; b = 1; main = a{3,5} b;');
+    let matches = Array.from(stateMachine.match([0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1]));
+    assert.deepEqual(matches, [
+      [3, 6, []],
+      [7, 11, []]
+    ]);
+  });
+
   it('should compile a state machine with tags', function () {
     let stateMachine = compile('a = 0; b = 1; main = x:(b a) | y:(a b);');
     let input = [1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0];
