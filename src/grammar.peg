@@ -22,12 +22,18 @@ variable
   = v:name  { return new n.Variable(v) }
 
 expr
-  = a:expr_q _ '|' _ b:expr     { return new n.Alternation(a, b) }
-  / a:expr_q _ b:expr           { return new n.Concatenation(a, b) }
-  / expr_q
+  = alternation
 
-expr_q
-  = t:name ':' e:expr_q { return new n.Concatenation(e, new n.Tag(t)) }
+alternation
+  = a:concatenation _ '|' _ b:alternation     { return new n.Alternation(a, b) }
+  / concatenation
+
+concatenation
+  = a:repeat _ b:concatenation           { return new n.Concatenation(a, b) }
+  / repeat
+
+repeat
+  = t:name ':' e:repeat { return new n.Concatenation(e, new n.Tag(t)) }
   / t:term '*'  { return new n.Repeat(t, '*') }
   / t:term '?'  { return new n.Repeat(t, '?') }
   / t:term '+'  { return new n.Repeat(t, '+') }
