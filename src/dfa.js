@@ -1,3 +1,6 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import {EndMarker, Concatenation, Literal, Tag} from './nodes';
 import {addAll, equal} from './utils';
 

@@ -1,5 +1,5 @@
 import babel from 'rollup-plugin-babel';
-import localResolve from 'rollup-plugin-local-resolve';
+import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
 export default {  
@@ -8,7 +8,7 @@ export default {
     sourcemap: true
   },
   plugins: [
-    localResolve(),
+    resolve(),
     commonjs(),
     babel({
       presets: [
@@ -22,7 +22,8 @@ export default {
                 'Firefox 57',
                 'Chrome 60',
                 'iOS 10',
-                'Safari 10'
+                'Safari 10',
+                'IE 11'
               ]
             }
           }
