@@ -16,7 +16,12 @@
   },
   "scripts": {
     "test": "mocha --require @babel/register",
-    "prepublish": "make"
+    "build:grammar": "pegjs src/grammar.peg",
+    "build:index": "rollup -c -m -i src/StateMachine.js -o index.js",
+    "build:compile": "rollup -c -m -i src/compile.js -o compile.js",
+    "build": "npm run build:grammar && npm run build:index && npm run build:compile",
+    "clean": "rm -f index.js index.js.map compile.js compile.js.map src/grammar.js",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
