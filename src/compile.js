@@ -1,7 +1,7 @@
 import grammar from './grammar';
 import SymbolTable from './SymbolTable';
 import buildDFA from './dfa';
-import StateMachine from './StateMachine';
+import { StateMachine } from './StateMachine';
 
 export function parse(string, externalSymbols) {
   let ast = grammar.parse(string);
@@ -18,6 +18,6 @@ export function build(symbolTable) {
   });
 }
 
-export default function compile(string, externalSymbols) {
+export function compile(string, externalSymbols) {
   return build(parse(string, externalSymbols));
 }

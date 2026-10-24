@@ -3,7 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 
 export default {  
   output: {
-    format: 'cjs',
+    format: 'es',
     sourcemap: true
   },
   plugins: [

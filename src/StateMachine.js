@@ -5,7 +5,7 @@ const FAIL_STATE = 0;
  * A StateMachine represents a deterministic finite automaton.
  * It can perform matches over a sequence of values, similar to a regular expression.
  */
-export default class StateMachine {
+export class StateMachine {
   constructor(dfa) {
     this.stateTable = dfa.stateTable;
     this.accepting = dfa.accepting;
