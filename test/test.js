@@ -1,4 +1,4 @@
-import compile from '../compile';
+import compile from '../compile.js';
 import assert from 'assert';
 
 describe('state machine compiler', function () {
